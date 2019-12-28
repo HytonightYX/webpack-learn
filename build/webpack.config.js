@@ -2,6 +2,9 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
+let indexLess = new ExtractTextWebpackPlugin('index.less')
+let indexCss = new ExtractTextWebpackPlugin('index.css')
 
 module.exports = {
 	mode: 'development',
@@ -9,12 +12,65 @@ module.exports = {
 		rules: [
 			{
 				test: /\.less$/,
+				use: indexLess.extract({
+					use: [
+						MiniCssExtractPlugin.loader,
+						'css-loader',
+						'less-loader'
+					],
+				})
+			},
+			{
+				test: /\.(jpe?g|png|gif)$/i, //图片文件
 				use: [
-					MiniCssExtractPlugin.loader,
-					'css-loader',
-					'less-loader'
-				],
-			}
+					{
+						loader: 'url-loader',
+						options: {
+							limit: 10240,
+							fallback: {
+								loader: 'file-loader',
+								options: {
+									name: 'img/[name].[hash:8].[ext]'
+								}
+							}
+						}
+					}
+				]
+			},
+			{
+				test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/, //媒体文件
+				use: [
+					{
+						loader: 'url-loader',
+						options: {
+							limit: 10240,
+							fallback: {
+								loader: 'file-loader',
+								options: {
+									name: 'media/[name].[hash:8].[ext]'
+								}
+							}
+						}
+					}
+				]
+			},
+			{
+				test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i, // 字体
+				use: [
+					{
+						loader: 'url-loader',
+						options: {
+							limit: 10240,
+							fallback: {
+								loader: 'file-loader',
+								options: {
+									name: 'fonts/[name].[hash:8].[ext]'
+								}
+							}
+						}
+					}
+				]
+			},
 		]
 	},
 	entry: {
@@ -40,6 +96,8 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: '[name].[hash].css',
 			chunkFilename: '[id].css'
-		})
+		}),
+		new ExtractTextWebpackPlugin('index.less'),
+		new ExtractTextWebpackPlugin('index.css')
 	]
 }

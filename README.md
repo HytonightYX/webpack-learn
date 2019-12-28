@@ -27,3 +27,13 @@ gyp: No Xcode or CLT version detected!
 
 >>> https://github.com/nodejs/node-gyp/issues/1927
 ```
+
+
+```
+我们所用到的mini-css-extract-plugin会将所有的css样式合
+并为一个css文件。如果你想拆分为一一对应的多个css文件,我们
+需要使用到extract-text-webpack-plugin，而目前
+mini-css-extract-plugin还不支持此功能。我们需要安装@next
+版本的extract-text-webpack-plugin
+
+```
