@@ -1,0 +1,8 @@
+.idea
+.vscode
+.node_modules
+package-lock.json
+yarn.lock
+
+# Project exclude paths
+/node_modules/
