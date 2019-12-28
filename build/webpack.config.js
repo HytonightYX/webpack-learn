@@ -4,6 +4,18 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 
 module.exports = {
 	mode: 'development', // 开发模式
+	module: {
+		rules: [
+			{
+				test: /\.css$/,
+				use: ['style-loader', 'css-loader'] // 从右向左解析原则
+			},
+			{
+				test: /\.less$/,
+				use: ['style-loader', 'css-loader', 'less-loader'] // 从右向左解析原则
+			}
+		]
+	},
 	entry: {
 		main: path.resolve(__dirname, '../src/main.js'),
 		header: path.resolve(__dirname, '../src/header.js')
