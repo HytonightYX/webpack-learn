@@ -19,19 +19,3 @@
 webpack 4.41.2
 node: 10.15.3
 ```
-
-
-
-## 入门(一起来用这些小例子让你熟悉webpack的配置)
-
-```
-npm init
-
-npm i -D webpack webpack-cli
-```
-
-
-
-配置package.json命令
-
-![](https://tva1.sinaimg.cn/large/006tNbRwly1gacm60vtcgj30ak021q2q.jpg)

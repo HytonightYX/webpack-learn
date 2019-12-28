@@ -4,8 +4,7 @@
   "description": "learn webpack in action",
   "main": "index.js",
   "scripts": {
-    "build": "webpack src/main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --config build/webpack.config.js"
   },
   "repository": {
     "type": "git",
