@@ -37,3 +37,9 @@ mini-css-extract-plugin还不支持此功能。我们需要安装@next
 版本的extract-text-webpack-plugin
 
 ```
+
+```
+注意 babel-loader与babel-core的版本对应关系
+babel-loader 8.x 对应babel-core 7.x
+babel-loader 7.x 对应babel-core 6.x
+```

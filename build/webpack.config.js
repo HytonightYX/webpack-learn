@@ -6,10 +6,22 @@ const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
 let indexLess = new ExtractTextWebpackPlugin('index.less')
 let indexCss = new ExtractTextWebpackPlugin('index.css')
 
+require('@babel/polyfill')
+
 module.exports = {
 	mode: 'development',
 	module: {
 		rules: [
+			{
+				test:/\.js$/,
+				use:{
+					loader:'babel-loader',
+					options:{
+						presets:['@babel/preset-env']
+					}
+				},
+				exclude:/node_modules/
+			},
 			{
 				test: /\.less$/,
 				use: indexLess.extract({
@@ -74,8 +86,7 @@ module.exports = {
 		]
 	},
 	entry: {
-		main: path.resolve(__dirname, '../src/main.js'),
-		header: path.resolve(__dirname, '../src/header.js')
+		main: ["@babel/polyfill", path.resolve(__dirname,'../src/main.js')],
 	},
 	output: {
 		filename: '[name].[hash:8].js',      // 打包后的文件名称
