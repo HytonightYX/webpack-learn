@@ -3,16 +3,21 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 
 module.exports = {
-	mode: 'development', // 开发模式
+	mode: 'development',
 	module: {
 		rules: [
 			{
 				test: /\.css$/,
-				use: ['style-loader', 'css-loader'] // 从右向左解析原则
+				use: ['style-loader', 'css-loader']
 			},
 			{
 				test: /\.less$/,
-				use: ['style-loader', 'css-loader', 'less-loader'] // 从右向左解析原则
+				use: ['style-loader', 'css-loader', {
+					loader: 'postcss-loader',
+					options: {
+						plugins: [require('autoprefixer')]
+					}
+				},'less-loader']
 			}
 		]
 	},
