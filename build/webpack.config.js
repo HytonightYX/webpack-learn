@@ -1,23 +1,19 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
 	mode: 'development',
 	module: {
 		rules: [
 			{
-				test: /\.css$/,
-				use: ['style-loader', 'css-loader']
-			},
-			{
 				test: /\.less$/,
-				use: ['style-loader', 'css-loader', {
-					loader: 'postcss-loader',
-					options: {
-						plugins: [require('autoprefixer')]
-					}
-				},'less-loader']
+				use: [
+					MiniCssExtractPlugin.loader,
+					'css-loader',
+					'less-loader'
+				],
 			}
 		]
 	},
@@ -40,6 +36,10 @@ module.exports = {
 			filename: 'header.html',
 			chunks: ['header'] // 与入口文件对应的模块名
 		}),
-		new CleanWebpackPlugin()
+		new CleanWebpackPlugin(),
+		new MiniCssExtractPlugin({
+			filename: '[name].[hash].css',
+			chunkFilename: '[id].css'
+		})
 	]
 }
