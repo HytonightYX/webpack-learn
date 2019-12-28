@@ -5,3 +5,4 @@ yarn.lock
 
 # Project exclude paths
 /node_modules/
+dist

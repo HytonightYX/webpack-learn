@@ -19,3 +19,11 @@
 webpack 4.41.2
 node: 10.15.3
 ```
+
+## 重要记录
+```
+node-gyp 报错
+gyp: No Xcode or CLT version detected!
+
+>>> https://github.com/nodejs/node-gyp/issues/1927
+```
